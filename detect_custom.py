@@ -2,6 +2,7 @@ from utils.torch_utils import select_device
 from utils.general import check_img_size, non_max_suppression, scale_coords
 from models.common import DetectMultiBackend
 from utils.augmentations import letterbox
+from utils.plots import Annotator, colors
 import torch
 import numpy as np
 
@@ -15,6 +16,9 @@ if __name__ == "__main__":
     classes = None  # filter by class: --class 0, or --class 0 2 3
     agnostic_nms = False  # class-agnostic NMS
     max_det = 1  # maximum detections per image
+    line_thickness = 3  # bounding box thickness (pixels)
+    hide_labels = False  # hide labels
+    hide_conf = False  # hide confidences
 
     # setup
     device = select_device("")
@@ -55,3 +59,13 @@ if __name__ == "__main__":
     det[:, :4] = scale_coords(im.shape[2:], det[:, :4], im0.shape).round()
     *xyxy, conf, cls = det[0]  # bbox pixels, confidence, class
     xmin, ymin, xmax, ymax = xyxy
+
+    # Annotation
+    annotator = Annotator(im0, line_width=line_thickness, example=str(names))
+    c = int(cls)
+    label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
+    annotator.box_label(xyxy, label, color=colors(c, True))
+    im0 = annotator.result()
+
+    cv2.imshow('image', im0)
+    cv2.waitKey(0)
