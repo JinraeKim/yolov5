@@ -52,6 +52,14 @@
 </div>
 
 
+## <div align="center">NOTES</div>
+This is based on [YOLOv5](https://github.com/ultralytics/yolov5).
+Some code would be modified for personal usage.
+
+### Simplified prediction with cv2 image
+You can take a look at `./detection_custom.py`.
+
+
 ## <div align="center">Documentation</div>
 
 See the [YOLOv5 Docs](https://docs.ultralytics.com) for full documentation on training, testing and deployment.
