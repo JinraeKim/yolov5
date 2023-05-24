@@ -59,6 +59,27 @@ Some code would be modified for personal usage.
 ### Simplified prediction with cv2 image
 You can take a look at `./detection_custom.py`.
 
+### For stair detection
+You probably need to rearange the directory structure after downloading dataset from Roboflow as follows,
+```
+.
+├── datasets
+│   └── stair
+│       ├── images
+│       │   ├── test
+│       │   ├── train
+│       │   └── valid
+│       └── labels
+│           ├── test
+│           ├── train
+│           └── valid
+└── yolov5
+```
+
+Then,
+```
+python train.py --data stair.yaml --cfg yolov5s.yaml --weights '' --batch-size -1
+```
 
 ## <div align="center">Documentation</div>
 
